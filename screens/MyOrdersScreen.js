@@ -25,7 +25,7 @@ export default class MyOrdersScreen extends React.Component {
         this.props.navigation.navigate('Home');
       } else {
         console.log('requesting');
-        axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + res)
+        axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + 12345)
         .then(response => {
           console.log(response.data);
           if(response.data !== undefined && response.data !== null){

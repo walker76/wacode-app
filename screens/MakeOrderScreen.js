@@ -74,7 +74,7 @@ export default class MakeOrderScreen extends React.Component {
           let jobRequest = {
               title: this.state.address,
               description: this.state.streetaddress + " " + this.state.city + " " + this.state.stayte,
-              deviceId: res, // THIS NEEDS TO BE FROM LOCAL STORAGE
+              deviceId: 12345, // THIS NEEDS TO BE FROM LOCAL STORAGE
               lat: this.state.location.coords.latitude,
               lang: this.state.location.coords.longitude,
           };
