@@ -6,6 +6,7 @@ import { CheckBox, Input, Button } from 'react-native-elements';
 import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import GallerySwiper from 'react-native-gallery-swiper';
 
 export default class StartLocationScreen extends React.Component {
   constructor(props) {
@@ -27,7 +28,18 @@ export default class StartLocationScreen extends React.Component {
             <Text style={styles.option}>(254) 235-2646</Text>
             <LabelForInput customLabel='Operating Hours' />
             <Text style={styles.option}>Sun.-Sat. 11AM-11PM</Text>
-            
+            <View style={styles.containerGallery}>
+              <GallerySwiper
+                  images={[
+                    { source: require("../assets/images/shorty-in-front.jpg"),
+                      dimensions: { width: 550, height: 366 } },
+                    { source: require("../assets/images/shorty-wife.jpg"),
+                      width: 760,
+                      height: 540 },
+
+                  ]}
+              />
+            </View>
           </ScrollView>
       </View>
     );
@@ -222,5 +234,13 @@ const styles = StyleSheet.create({
   containerStacked: {
     flex: 1,
     paddingTop: 20,
+  },
+  containerGallery: {
+    padding: 20,
+    justifyContent: 'space-evenly',
+    height: 400,
+    width: 400,
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
 });

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
-import GallerySwiper from "react-native-gallery-swiper";
+
 import { MonoText } from '../components/StyledText';
 import {
   CheckBox,
@@ -20,53 +20,18 @@ export default function HomeScreen() {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/shortys-logo.png')
-                : require('../assets/images/shortys-logo.png')
+                ? require('../assets/images/universal-pizza-logo.png')
+                : require('../assets/images/universal-pizza-logo.png')
             }
             style={styles.welcomeImage}
           />
         </View>
-        <View>
-          <GallerySwiper
-              images={[
-                { source: require("../assets/images/shorty-in-front.jpg"),
-                  dimensions: { width: 550, height: 366 } },
-                { source: require("../assets/images/shorty-wife.jpg"),
-                  width: 760,
-                  height: 540 },
-
-              ]}
-          />
-        </View>
 
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
-          </Text>
+          <WelcomeText />
         </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-          </TouchableOpacity>
-        </View>
+        <InstructionsText />
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
     </View>
   );
 }
