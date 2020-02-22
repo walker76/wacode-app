@@ -6,6 +6,8 @@ import { CheckBox, Input, Button } from 'react-native-elements';
 import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import axios from 'axios';
+import { AsyncStorage, Platform } from 'react-native';
 
 export default class StartLocationScreen extends React.Component {
   constructor(props) {
@@ -13,24 +15,45 @@ export default class StartLocationScreen extends React.Component {
     this.state = {
       completed: false,
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillMount(){
-    axios.put('https://wacode-2020.herokuapp.com/device/register')
-    .then(response => {
-      console.log(response.data);
-      if(response.data !== undefined){
-        console.log('response', response.data);
-        AsyncStorage.setItem('@Store:id', response.data.id)
+  onSubmit(){
+      console.log('starting registration')
+        axios.put('https://wacode-2020.herokuapp.com/device/register')
+        .then(response => {
+            console.log('here2')
+        console.log(response.data);
+        if(response.data !== undefined){
+            console.log('response', response.data);
+            AsyncStorage.setItem('@Store:id', response.data.id)
+            .catch(err => {
+                console.error(err);
+            });
+        }
+        })
         .catch(err => {
-          console.error(err);
+            console.error(err);
         });
-      }
-    })
-    .catch(err => {
-      console.error(err);
-    });
+        console.log('completed registration')
+        this.props.navigation.navigate('Root');
   }
+//   componentDidMount(){
+//     axios.put('https://wacode-2020.herokuapp.com/device/register')
+//     .then(response => {
+//       console.log(response.data);
+//       if(response.data !== undefined){
+//         console.log('response', response.data);
+//         AsyncStorage.setItem('@Store:id', response.data.id)
+//         .catch(err => {
+//           console.error(err);
+//         });
+//       }
+//     })
+//     .catch(err => {
+//       console.error(err);
+//     });
+//   }
 
   render() {
     return (
@@ -38,14 +61,10 @@ export default class StartLocationScreen extends React.Component {
         <ScrollView>
             <Text style={styles.optionsTitleText}>Welcome To Universal Pizza</Text>
             <Text style={styles.optionSubheadingText}>A Location-Based Pizza Provider</Text>
-            <LabelForInput customLabel='Please Enter Your Current Zip Code' />
-            <InputTextWPaTCT plchldrTxt='11111' txtCT='postalCode' />
-            <View>
-                {this.state.completed && 
-                  <Text>Location Saved!</Text>
-                }
+            <View style={styles.optionMultipleButtons}>
+                <LabelForInput customLabel='Based On Your Current Location, Your Zip Code is: ' />
+                <Text style={styles.option}>76706</Text>
             </View>
-            
             <View style={styles.containerStacked}>
               <Button
                 type="outline"
@@ -56,7 +75,7 @@ export default class StartLocationScreen extends React.Component {
                   color='green'
                   />
                 }
-                onPress={() => this.props.navigation.navigate('Root')}
+                onPress={this.onSubmit}
                 iconRight
                 title='Get Started        '
                 style={styles.optionButton}

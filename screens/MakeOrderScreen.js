@@ -7,6 +7,7 @@ import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Permissions, Location} from 'expo';
+import axios from 'axios';
 
 
 export default class MakeOrderScreen extends React.Component {
@@ -62,7 +63,7 @@ export default class MakeOrderScreen extends React.Component {
 
       AsyncStorage.getItem('@Store:id')
       .then(res => {
-        if(res !== undefined %% res !== null){
+        if(res !== undefined && res !== null){
           let jobRequest = {
               title: this.state.title,
               description: this.state.description,
