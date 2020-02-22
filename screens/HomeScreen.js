@@ -19,8 +19,8 @@ export default function HomeScreen() {
           <Image
             source={
               __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
+                ? require('../assets/images/shortys-logo.png')
+                : require('../assets/images/shortys-logo.png')
             }
             style={styles.welcomeImage}
           />

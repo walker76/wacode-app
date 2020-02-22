@@ -12,7 +12,21 @@ export default class MakeOrderScreen extends React.Component {
     super(props);
     this.state = {
       apartment: false,
+      residential: false,
+      office: false,
+      school: false,
+      church:false
     };
+  }
+
+  reset(){
+      this.state = {
+          apartment: false,
+          residential: false,
+          office: false,
+          school: false,
+          church: false
+      };
   }
 
   render() {
@@ -32,10 +46,68 @@ export default class MakeOrderScreen extends React.Component {
               <CheckboxWTaCaOP
                 name='Apartment'
                 ischecked={this.state.apartment}
-                uponpress={() => this.setState({
-                    apartment: !this.state.apartment,
-                  })
+                uponpress={() => {
+                    this.reset();
+                    this.setState({
+                        residential: false,
+                        office: false,
+                        school: false,
+                        church: false,
+                        apartment: !this.state.apartment,
+                    })
                 }
+                }
+              />
+              <CheckboxWTaCaOP
+                name='Office Building'
+                ischecked={this.state.office}
+                uponpress={() => this.setState({
+                    apartment: false,
+                    residential: false,
+                    school: false,
+                    church: false,
+                    office: !this.state.office,
+                })
+                }
+              />
+            </View>
+            <View style={styles.optionMultipleButtons}>
+              <CheckboxWTaCaOP
+                  name='Residential'
+                  ischecked={this.state.residential}
+                  uponpress={() => this.setState({
+                      apartment: false,
+                      office: false,
+                      school: false,
+                      church: false,
+                      residential: !this.state.residential,
+                  })
+                  }
+              />
+
+            <CheckboxWTaCaOP
+                    name='School'
+                    ischecked={this.state.school}
+                    uponpress={() => this.setState({
+                        apartment: false,
+                        residential: false,
+                        office: false,
+                        church: false,
+                        school: !this.state.school,
+                    })
+                    }
+              />
+              <CheckboxWTaCaOP
+                    name='Church'
+                    ischecked={this.state.church}
+                    uponpress={() => this.setState({
+                        apartment: false,
+                        residential: false,
+                        office: false,
+                        school: false,
+                        church: !this.state.church,
+                    })
+                    }
               />
             </View>
             <Text style={styles.optionSubheadingText}>My Order</Text>
