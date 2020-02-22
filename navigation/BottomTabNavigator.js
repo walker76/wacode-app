@@ -3,6 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import MakeOrderScreen from '../screens/MakeOrderScreen';
+import MyOrdersScreen from '../screens/MyOrdersScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -25,7 +28,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Make Order"
-        component={LinksScreen}
+        component={MakeOrderScreen}
         options={{
           title: 'Make Order',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-pizza" />,
@@ -33,7 +36,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="My Orders"
-        component={LinksScreen}
+        component={MyOrdersScreen}
         options={{
           title: 'My Orders',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-clock" />,
@@ -41,7 +44,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="About"
-        component={LinksScreen}
+        component={AboutScreen}
         options={{
           title: 'About',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-information-circle" />,
@@ -56,8 +59,14 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'How to get started';
+      return 'Welcome To Universal Pizza';
     case 'Links':
       return 'Links to learn more';
+    case 'Make Order':
+      return 'Create An Order';
+    case 'My Orders':
+      return 'My Orders';
+    case 'About':
+      return 'About Us'
   }
 }
