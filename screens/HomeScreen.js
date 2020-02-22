@@ -2,8 +2,14 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
-
 import { MonoText } from '../components/StyledText';
+import { 
+  CheckBox, 
+  Input,
+  Button,
+  ThemeProvider
+} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function HomeScreen() {
   return (
@@ -21,24 +27,25 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+          {/* <DevelopmentModeNotice /> */}
+          <WelcomeText />
 
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
+          {/* <Text style={styles.getStartedText}>Open up the code for this screen:</Text> */}
 
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          {/* <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
+          </View> */}
 
-          <Text style={styles.getStartedText}>
+          {/* <Text style={styles.getStartedText}>
             Change any of the text, save the file, and your app will automatically reload.
-          </Text>
+          </Text> */}
         </View>
-
-        <View style={styles.helpContainer}>
+        <InstructionsText />
+        {/* <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -77,6 +84,26 @@ function DevelopmentModeNotice() {
       </Text>
     );
   }
+}
+
+//Welcome text above image icon
+function WelcomeText() {
+  return (
+    <Text style={styles.welcomeTxt}>
+      Welcome To Universal Pizza, your one-stop-shop service for ordering local pizza!
+    </Text>
+  );
+}
+
+//Instruction text for homepage
+function InstructionsText(){
+  return (
+    <Text style={styles.InstructionsText}>
+      Click the 'Make Order' tab below to place an order.{"\n\n"}
+      <Text style={styles.orText}>OR</Text> {"\n\n"}
+      Click the 'My Orders' tab to receive information on current and past orders.
+    </Text>
+  )
 }
 
 function handleLearnMorePress() {
@@ -175,5 +202,28 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
+  },
+  InstructionsText: {
+    margin: 40,
+    color: 'green',
+    fontSize: 20,
+    lineHeight: 22,
+    textAlign: 'center',
+  },
+  welcomeTxt: {
+    marginTop: 10,
+    marginBottom: 25,
+    marginHorizontal: 25,
+    color: 'black',
+    fontSize: 20,
+    lineHeight: 22,
+    textAlign: 'center',
+  },
+  orText: {
+    margin: 40,
+    color: 'rgba(0,50,0,0.8)',
+    fontSize: 20,
+    lineHeight: 22,
+    textAlign: 'center',
   },
 });
