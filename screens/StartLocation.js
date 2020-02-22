@@ -19,41 +19,25 @@ export default class StartLocationScreen extends React.Component {
   }
 
   onSubmit(){
-      console.log('starting registration')
-        axios.put('https://wacode-2020.herokuapp.com/device/register')
-        .then(response => {
-            console.log('here2')
-        console.log(response.data);
-        if(response.data !== undefined){
-            console.log('response', response.data);
-            AsyncStorage.setItem('@Store:id', response.data.id)
-            .catch(err => {
-                console.error(err);
-            });
-        }
-        })
-        .catch(err => {
-            console.error(err);
-        });
-        console.log('completed registration')
+    //   console.log('starting registration')
+    //     axios.put('https://wacode-2020.herokuapp.com/device/register')
+    //     .then(response => {
+    //         console.log('here2')
+    //     console.log(response.data);
+    //     if(response.data !== undefined){
+    //         console.log('response', response.data);
+    //         AsyncStorage.setItem('@Store:id', response.data.id)
+    //         .catch(err => {
+    //             console.error(err);
+    //         });
+    //     }
+    //     })
+    //     .catch(err => {
+    //         console.error(err);
+    //     });
+    //     console.log('completed registration')
         this.props.navigation.navigate('Root');
   }
-//   componentDidMount(){
-//     axios.put('https://wacode-2020.herokuapp.com/device/register')
-//     .then(response => {
-//       console.log(response.data);
-//       if(response.data !== undefined){
-//         console.log('response', response.data);
-//         AsyncStorage.setItem('@Store:id', response.data.id)
-//         .catch(err => {
-//           console.error(err);
-//         });
-//       }
-//     })
-//     .catch(err => {
-//       console.error(err);
-//     });
-//   }
 
   render() {
     return (
@@ -63,7 +47,7 @@ export default class StartLocationScreen extends React.Component {
             <Text style={styles.optionSubheadingText}>A Location-Based Pizza Provider</Text>
             <View style={styles.optionMultipleButtons}>
                 <LabelForInput customLabel='Based On Your Current Location, Your Zip Code is: ' />
-                <Text style={styles.option}>76706</Text>
+                <Text style={styles.optionSmallHeadingAnswer}>76706</Text>
             </View>
             <View style={styles.containerStacked}>
               <Button
@@ -262,6 +246,13 @@ const styles = StyleSheet.create({
   optionSmallHeadingText: {
     fontSize: 15,
     fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 10,
+    textAlign: 'center',
+  },
+  optionSmallHeadingAnswer: {
+    fontSize: 15,
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 10,
