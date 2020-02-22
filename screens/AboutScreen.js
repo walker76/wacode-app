@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   optionsTitleText: {
     textAlign: 'center',
     fontSize: 32,
-    paddingTop: 60,
+    paddingTop: 20,
     marginBottom: 10,
     fontWeight: 'bold',
     textDecorationLine: 'underline',
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   optionSubheadingText: {
     textAlign: 'center',
     fontSize: 20,
-    marginTop: 50,
+    marginTop: 20,
     marginBottom: 10,
     fontWeight: 'bold',
   },
