@@ -48,6 +48,7 @@ export default class MakeOrderScreen extends React.Component {
     }
 
     _getLocationAsync = async () => {
+      if(Permissions != null){
         let { status } = await Permissions.askAsync(Permissions.LOCATION);
         if( status !== 'granted') {
             this.setState({
@@ -57,6 +58,7 @@ export default class MakeOrderScreen extends React.Component {
         let location = await Location.getCurrentPositionAsync({});
         console.log(location);
         this.setState({locationResult: JSON.stringify(location), location, });
+      }
     };
 
     onSubmit(){

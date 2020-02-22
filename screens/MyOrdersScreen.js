@@ -1,33 +1,84 @@
 import * as React from 'react';
+import {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios';
+import {AsyncStorage, Platform} from 'react-native';
 
-export default function MyOrdersScreen() {
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Text style={styles.optionSubheadingText}>My Orders</Text>
-      <OptionButton
-        icon="md-pizza"
-        onPress={() => null}
-      />
+export default class MyOrdersScreen extends React.Component {
 
-      <OptionButton
-        icon="md-pizza"
-        onPress={() => null}
-      />
+  constructor(props){
+    super(props);
+    this.state = {
+      orders: []
+    }
+  }
 
-      <OptionButton
-        icon="md-pizza"
-        onPress={() => null}
-        isLastOption
-      />
-    </ScrollView>
-  );
+  componentDidMount(){
+    AsyncStorage.getItem('@Store:id')
+    .then(res => {
+      console.log(res);
+      if(res == 'undefined' || res === 'undefined' || res == undefined || res === undefined || res == null || res === null){
+        console.log('navigating to Home');
+        this.props.navigation.navigate('Home');
+      } else {
+        console.log('requesting');
+        axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + res)
+        .then(response => {
+          console.log(response.data);
+          if(response.data !== undefined && response.data !== null){
+            console.log('setting state');
+            this.setState({
+              orders: response.data,
+            });
+          }
+        });
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
+
+  render(){
+
+    const list = this.state.orders;
+    if(list.length <= 0){
+      return(
+        <View style={styles.container}>
+          <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+            <View style={styles.welcomeContainer}>
+              <Text>You don't have any orders yet</Text>
+            </View>
+          </ScrollView>
+        </View>
+      );
+    }
+
+    return (
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.optionSubheadingText}>My Orders</Text>
+        {
+          list.map((item, i) => (
+            <OptionButton
+              icon="md-pizza"
+              title={item.title}
+              id={item.id}
+              onPress={() => {
+                  this._handleClick(item.id)
+                }
+              }
+            />
+          ))
+        }
+      </ScrollView>
+    );
+  }
 }
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
+function OptionButton({ icon, label, onPress, isLastOption, title }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
@@ -35,8 +86,8 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
           <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
         </View>
         <View style={styles.optionTextContainer}>
-          <LabelForInput customLabel='Order #' />
-
+          <LabelForInput customLabel={title} />
+          <LabelForInput customLabel={'Order #' + id} />
         </View>
       </View>
     </RectButton>
@@ -58,6 +109,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 15,
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
   },
   optionIconContainer: {
     marginRight: 12,

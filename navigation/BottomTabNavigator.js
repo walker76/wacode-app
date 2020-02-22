@@ -28,7 +28,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Make Order"
+        name="MakeOrder"
         component={MakeOrderScreen}
         options={{
           title: 'Make Order',
@@ -36,7 +36,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="My Orders"
+        name="MyOrders"
         component={MyOrdersScreen}
         options={{
           title: 'My Orders',
