@@ -18,7 +18,7 @@ export default class MakeOrderScreen extends React.Component {
             name: '',
             streetaddress: '',
             city : '',
-            country: '',
+            stayte: '',
             address: '',
             submitted: false,
             apartment: false,
@@ -104,13 +104,15 @@ export default class MakeOrderScreen extends React.Component {
             <Text style={styles.optionsTitleText}>Place An Order</Text>
             <Text style={styles.optionSubheadingText}>Location Information</Text>
             <LabelForInput customLabel='Full Name' />
-            <Input
+            <View><Input
                 labelStyle={styles.optionText}
                 placeholder={'Joseph Smith'}
                 containerStyle={styles.containerInput}
                 onChangeText={(address) => this.setState({address})}
                 value={this.state.address}
-            />            <LabelForInput customLabel='Location' />
+        />
+        </View><View>
+            <LabelForInput customLabel='Location' />
             <Input
                 labelStyle={styles.optionText}
                 placeholder={'Street Address'}
@@ -118,23 +120,29 @@ export default class MakeOrderScreen extends React.Component {
                 textContentType={'fullStreetAddress'}
                 onChangeText={(streetaddress) => this.setState({streetaddress})}
                 value={this.state.streetaddress}
-            />            <InputTextWPaTCT plchldrTxt='City' txtCT='addressCity' />
-            <Input
-                labelStyle={styles.optionText}
-                placeholder={'City'}
-                containerStyle={styles.containerInput}
-                textContentType={'addressCity'}
-                onChangeText={(city) => this.setState({city})}
-                value={this.state.city}
             />
-            <Input
-                labelStyle={styles.optionText}
-                placeholder={'Country' }
-                containerStyle={styles.containerInput}
-                textContentType={'countryName'}
-                onChangeText={(country) => this.setState({country})}
-                value={this.state.country}
-            />
+        </View>
+            <View>
+                <Input
+                    labelStyle={styles.optionText}
+                    placeholder={'City'}
+                    containerStyle={styles.containerInput}
+                    textContentType={'addressCity'}
+                    onChangeText={(city) => this.setState({city})}
+                    value={this.state.city}
+                />
+            </View>
+            <View>
+                <Input
+                    labelStyle={styles.optionText}
+                    placeholder={'State' }
+                    containerStyle={styles.containerInput}
+                    textContentType={'countryName'}
+                    onChangeText={(stayte) => this.setState({stayte})}
+                    value={this.state.stayte}
+                />
+            </View>
+
             <LabelForInput customLabel='Type of Area' />
             <View style={styles.optionMultipleButtons}>
               <CheckboxWTaCaOP
