@@ -17,14 +17,6 @@ export default class MyOrdersScreen extends React.Component {
   }
 
   componentDidMount(){
-    AsyncStorage.getItem('@Store:id')
-    .then(res => {
-      console.log(res);
-      if(res == 'undefined' || res === 'undefined' || res == undefined || res === undefined || res == null || res === null){
-        console.log('navigating to Home');
-        this.props.navigation.navigate('Home');
-      } else {
-        console.log('requesting');
         axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + 12345)
         .then(response => {
           console.log(response.data);
@@ -34,9 +26,7 @@ export default class MyOrdersScreen extends React.Component {
               orders: response.data,
             });
           }
-        });
-      }
-    })
+        })
     .catch(err => {
       console.error(err);
     });
@@ -67,7 +57,7 @@ export default class MyOrdersScreen extends React.Component {
               title={item.title}
               id={item.id}
               onPress={() => {
-                  this._handleClick(item.id)
+                  null
                 }
               }
             />
@@ -78,7 +68,7 @@ export default class MyOrdersScreen extends React.Component {
   }
 }
 
-function OptionButton({ icon, label, onPress, isLastOption, title }) {
+function OptionButton({ icon, label, onPress, isLastOption, title, id }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
