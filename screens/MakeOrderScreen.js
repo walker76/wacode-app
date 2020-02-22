@@ -8,7 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Permissions, Location} from 'expo-permissions';
 import axios from 'axios';
-
+import { AsyncStorage, Platform } from 'react-native';
 
 export default class MakeOrderScreen extends React.Component {
     constructor(props) {
@@ -89,7 +89,7 @@ export default class MakeOrderScreen extends React.Component {
               body: JSON.stringify(jobRequest),
           })
           
-          this.props.navigation.navigate('PostConfirmation');
+          this.props.navigation.navigate('Home');
         }
       })
       .catch(err => {
@@ -427,14 +427,14 @@ export default class MakeOrderScreen extends React.Component {
                 type="outline"
                 icon={
                   <Icon
-                  name={iname}
+                  name='save'
                   size={15}
-                  color={clr}
+                  color='green'
                   />
                 }
                 onPress={this.onSubmit}
                 iconRight
-                title={name}
+                title='Place Order'
               />
                 {this.state.submitted &&
                   <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
