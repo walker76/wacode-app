@@ -11,6 +11,10 @@ export default function(containerRef) {
           Home: 'home',
           Links: 'links',
           Settings: 'settings',
+          MakeOrder: 'make-order',
+          MyOrders: 'my-orders',
+          About: 'about',
+          Start: 'start'
         },
       },
     },

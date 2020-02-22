@@ -6,9 +6,10 @@ import LinksScreen from '../screens/LinksScreen';
 import MakeOrderScreen from '../screens/MakeOrderScreen';
 import MyOrdersScreen from '../screens/MyOrdersScreen';
 import AboutScreen from '../screens/AboutScreen';
+import StartLocationScreen from '../screens/StartLocation';
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Home';
+const INITIAL_ROUTE_NAME = 'home';
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the

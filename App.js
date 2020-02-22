@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
+import StartLocationScreen from './screens/StartLocation';
 
 const Stack = createStackNavigator();
 
@@ -50,8 +51,9 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName='Start' headerMode='none'>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="Start" component={StartLocationScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
@@ -62,6 +64,7 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 50,
     backgroundColor: '#fff',
   },
 });
