@@ -15,6 +15,23 @@ export default class StartLocationScreen extends React.Component {
     };
   }
 
+  componentWillMount(){
+    axios.put('https://wacode-2020.herokuapp.com/device/register')
+    .then(response => {
+      console.log(response.data);
+      if(response.data !== undefined){
+        console.log('response', response.data);
+        AsyncStorage.setItem('@Store:id', response.data.id)
+        .catch(err => {
+          console.error(err);
+        });
+      }
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>

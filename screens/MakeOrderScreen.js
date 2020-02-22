@@ -60,29 +60,33 @@ export default class MakeOrderScreen extends React.Component {
 
     onSubmit(){
 
-            let jobRequest = {
-                title: this.state.title,
-                description: this.state.description,
-                deviceId: 1, // THIS NEEDS TO BE FROM LOCAL STORAGE
-                lat: this.state.location.coords.latitude,
-                lang: this.state.location.coords.longitude,
-            };
-
-            console.log(jobRequest);
-
-            fetch('https://wacode-2020.herokuapp.com/orders/makeOrder', {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(jobRequest),
-            }).catch(err => {
-                console.error(err);
-            });
-
-            this.props.navigation.navigate('PostConfirmation');
-
+      AsyncStorage.getItem('@Store:id')
+      .then(res => {
+        if(res !== undefined %% res !== null){
+          let jobRequest = {
+              title: this.state.title,
+              description: this.state.description,
+              deviceId: res, // THIS NEEDS TO BE FROM LOCAL STORAGE
+              lat: this.state.location.coords.latitude,
+              lang: this.state.location.coords.longitude,
+          };
+          console.log(jobRequest);
+    
+          fetch('https://wacode-2020.herokuapp.com/orders/makeOrder', {
+              method: 'PUT',
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(jobRequest),
+          })
+          
+          this.props.navigation.navigate('PostConfirmation');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
     }
 
     render() {
