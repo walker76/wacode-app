@@ -8,28 +8,36 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class MakeOrderScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apartment: false,
-      residential: false,
-      office: false,
-      school: false,
-      church:false
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            apartment: false,
+            residential: false,
+            office: false,
+            school: false,
+            church: false,
+            buffalo: false,
+            pepperoni: false,
+            cheese: false,
+            margherita: false,
+            bbq: false,
+            custom: false,
+            meat: false,
+            bbqsauce: false,
+            tomatosauce: false,
+            buffalosauce: false,
+            pepperonimeat: false,
+            sausagemeat: false,
+            chickenmeat: false,
+            jalapenos: false,
+            pineapple: false,
+            olives: false,
 
-  reset(){
-      this.state = {
-          apartment: false,
-          residential: false,
-          office: false,
-          school: false,
-          church: false
-      };
-  }
+        };
 
-  render() {
+    }
+
+    render() {
     return (
       <View>
         <KeyboardAwareScrollView enableOnAndroid={true}>
@@ -47,7 +55,6 @@ export default class MakeOrderScreen extends React.Component {
                 name='Apartment'
                 ischecked={this.state.apartment}
                 uponpress={() => {
-                    this.reset();
                     this.setState({
                         residential: false,
                         office: false,
@@ -111,66 +118,223 @@ export default class MakeOrderScreen extends React.Component {
               />
             </View>
             <Text style={styles.optionSubheadingText}>My Order</Text>
-            <LabelForInput customLabel='Name of Event' />
-            <InputTextWPlaceholder plchldrTxt='Superstorm Sandy' />
-            <LabelForInput customLabel='Nature of Impact' />
+
+            <LabelForInput customLabel='Favorites' />
             <View style={styles.optionMultipleButtons}>
-              <CheckboxWTaCaOP
-                name='Wind'
-                ischecked={this.state.wind}
-                uponpress={(null)}
-              />
-              <CheckboxWTaCaOP
-                name='Flood'
-                ischecked={this.state.flood}
-                uponpress={() => this.setState({
-                    flood: !this.state.flood,
-                  })
-                }
-              />
-              <CheckboxWTaCaOP
-                name='Storm Surge'
-                ischecked={this.state.stormsurge}
-                uponpress={() => this.setState({
-                    stormsurge: !this.state.stormsurge,
-                  })
-                }
-              />
-              <CheckboxWTaCaOP
-                name='Other'
-                ischecked={this.state.other}
-                uponpress={() => this.setState({
-                    other: !this.state.other,
-                  })
-                }
-              />
+                <CheckboxWTaCaOP
+                    name='Buffalo Chicken'
+                    ischecked={this.state.buffalo}
+                    uponpress={() => {
+                        this.setState({
+                            pepperoni: false,
+                            cheese: false,
+                            margherita: false,
+                            bbq: false,
+                            custom: false,
+                            buffalo: !this.state.buffalo,
+                            meat: false,
+
+                        })
+                    }
+                    }
+                />
+
+                <CheckboxWTaCaOP
+                    name='Pepperoni '
+                    ischecked={this.state.pepperoni}
+                    uponpress={() => this.setState({
+                        cheese: false,
+                        margherita: false,
+                        bbq: false,
+                        custom: false,
+                        buffalo: false,
+                        pepperoni: !this.state.pepperoni,
+                        meat: false,
+
+                    })
+                    }
+                />
             </View>
+                <View style={styles.optionMultipleButtons}>
+                    <CheckboxWTaCaOP
+                        name='Cheese'
+                        ischecked={this.state.cheese}
+                        uponpress={() => {
+                            this.setState({
+                                pepperoni: false,
+                                cheese: !this.state.cheese,
+                                margherita: false,
+                                bbq: false,
+                                custom: false,
+                                buffalo: false,
+                                meat: false,
+
+                            })
+                        }
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                    name='Margherita'
+                    ischecked={this.state.margherita}
+                    uponpress={() => this.setState({
+                        pepperoni: false,
+                        cheese: false,
+                        margherita: !this.state.margherita,
+                        bbq: false,
+                        custom: false,
+                        buffalo: false,
+                        meat: false,
+
+                    })
+                    }
+                />
+                </View>
+            <View style={styles.optionMultipleButtons}>
+            <CheckboxWTaCaOP
+                        name='BBQ Chicken'
+                        ischecked={this.state.bbq}
+                        uponpress={() => this.setState({
+                            pepperoni: false,
+                            cheese: false,
+                            margherita: false,
+                            bbq: !this.state.bbq,
+                            custom: false,
+                            buffalo: false,
+                            meat: false,
+
+                        })
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                        name='Meat Lovers'
+                        ischecked={this.state.meat}
+                        uponpress={() => this.setState({
+                            pepperoni: false,
+                            cheese: false,
+                            margherita: false,
+                            bbq: !this.state.bbq,
+                            custom: false,
+                            buffalo: false,
+                            meat: !this.state.meat,
+                        })
+                        }
+                    />
+            </View>
+            <View style={styles.optionMultipleButtons}>
+
+            <CheckboxWTaCaOP
+                        name='Custom'
+                        ischecked={this.state.custom}
+                        uponpress={() => this.setState({
+                            pepperoni: false,
+                            cheese: false,
+                            margherita: false,
+                            bbq: false,
+                            custom: !this.state.custom,
+                            buffalo: false,
+                            meat: false,
+                        })
+                        }
+                    />
+                </View>
+
+            {this.state.custom &&
             <View>
-                {this.state.other && 
-                  <InputTextWPlaceholder plchldrTxt='Nature of Impact' />
-                }
+            <View style={styles.optionMultipleButtons}>
+                <CheckboxWTaCaOP
+                    name='Buffalo'
+                    ischecked={this.state.buffalosauce}
+                    uponpress={() => this.setState({
+                        buffalosauce: !this.state.buffalosauce,
+                        tomatosauce: false,
+                        bbqsauce: false,
+                    })
+                    }
+                />
+                <CheckboxWTaCaOP
+                    name='Classic Marinara'
+                    ischecked={this.state.tomatosauce}
+                    uponpress={() => this.setState({
+                        buffalosauce: false,
+                        tomatosauce: !this.state.tomatosauce,
+                        bbqsauce: false,
+                    })
+                    }
+                />
+                <CheckboxWTaCaOP
+                    name='BBQ'
+                    ischecked={this.state.bbqsauce}
+                    uponpress={() => this.setState({
+                        buffalosauce: false,
+                        tomatosauce: false,
+                        bbqsauce: !this.state.bbqsauce,
+                    })
+                    }
+                />
             </View>
+                <View style={styles.optionMultipleButtons}>
+                    <CheckboxWTaCaOP
+                        name='Pepperoni'
+                        ischecked={this.state.pepperonimeat}
+                        uponpress={() => this.setState({
+                            pepperonimeat: !this.state.pepperonimeat,
+                        })
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                        name='Sausage'
+                        ischecked={this.state.sausagemeat}
+                        uponpress={() => this.setState({
+                            sausagemeat: !this.state.sausagemeat
+                        })
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                        name='Chicken'
+                        ischecked={this.state.chickenmeat}
+                        uponpress={() => this.setState({
+                            chickenmeat: !this.state.chickenmeat
+                        })
+                        }
+                    />
+                </View>
+                <View style={styles.optionMultipleButtons}>
+                    <CheckboxWTaCaOP
+                        name='Jalapeno'
+                        ischecked={this.state.jalapeno}
+                        uponpress={() => this.setState({
+                            jalapeno: !this.state.jalapeno,
+                        })
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                        name='Pineapple'
+                        ischecked={this.state.pineapple}
+                        uponpress={() => this.setState({
+                            pineapple: !this.state.pineapple
+                        })
+                        }
+                    />
+                    <CheckboxWTaCaOP
+                        name='Olives'
+                        ischecked={this.state.olives}
+                        uponpress={() => this.setState({
+                            olives: !this.state.olives
+                        })
+                        }
+                    />
+                </View>
+            </View>
+
+            }
+
             <View style={styles.containerStacked}>
                 <SubmitOrSaveButton state={this.state} />
                 {this.state.submitted && 
                   <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
                 }
             </View>
-            <View style={styles.containerStacked}>
-              <Button
-                type="outline"
-                icon={
-                  <Icon
-                  name='arrow-left'
-                  size={15}
-                  color='blue'
-                  />
-                }
-                onPress={() => this.props.navigation.navigate('Map')}
-                iconLeft
-                title='   Back To Map'
-              />
-            </View>
+
           </KeyboardAwareScrollView>
       </View>
     );
@@ -269,7 +433,7 @@ function SubmitOrSaveButton(state){
     } else {
       return (
         <ButtonWTitleAnIconAColor
-          name='Save Progress    '
+          name='Place Order'
           iname='save'
           clr='red'
           uponpress={() => null}
