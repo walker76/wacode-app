@@ -1,108 +1,46 @@
+import * as React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
-import { CheckBox, Input, Button } from 'react-native-elements';
-import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
-export default class MyOrdersScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apartment: false,
-    };
-  }
+export default function MyOrdersScreen() {
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <Text style={styles.optionSubheadingText}>My Orders</Text>
+      <OptionButton
+        icon="md-pizza"
+        onPress={() => null}
+      />
 
-  render() {
-    return (
-      <View>
-        <KeyboardAwareScrollView enableOnAndroid={true}>
-            <Text style={styles.optionsTitleText}>Place An Order</Text>
-            <Text style={styles.optionSubheadingText}>Location Information</Text>
-            <LabelForInput customLabel='Full Name' />
-            <InputTextWPlaceholder plchldrTxt='Joseph Smith' />
-            <LabelForInput customLabel='Location' />
-            <InputTextWPaTCT plchldrTxt='Street' txtCT='fullStreetAddress' />
-            <InputTextWPaTCT plchldrTxt='City' txtCT='addressCity' />
-            <InputTextWPaTCT plchldrTxt='Country' txtCT='countryName' />
-            <LabelForInput customLabel='Type of Area' />
-            <View style={styles.optionMultipleButtons}>
-              <CheckboxWTaCaOP
-                name='Apartment'
-                ischecked={this.state.apartment}
-                uponpress={() => this.setState({
-                    apartment: !this.state.apartment,
-                  })
-                }
-              />
-            </View>
-            <Text style={styles.optionSubheadingText}>My Order</Text>
-            <LabelForInput customLabel='Name of Event' />
-            <InputTextWPlaceholder plchldrTxt='Superstorm Sandy' />
-            <LabelForInput customLabel='Nature of Impact' />
-            <View style={styles.optionMultipleButtons}>
-              <CheckboxWTaCaOP
-                name='Wind'
-                ischecked={this.state.wind}
-                uponpress={(null)}
-              />
-              <CheckboxWTaCaOP
-                name='Flood'
-                ischecked={this.state.flood}
-                uponpress={() => this.setState({
-                    flood: !this.state.flood,
-                  })
-                }
-              />
-              <CheckboxWTaCaOP
-                name='Storm Surge'
-                ischecked={this.state.stormsurge}
-                uponpress={() => this.setState({
-                    stormsurge: !this.state.stormsurge,
-                  })
-                }
-              />
-              <CheckboxWTaCaOP
-                name='Other'
-                ischecked={this.state.other}
-                uponpress={() => this.setState({
-                    other: !this.state.other,
-                  })
-                }
-              />
-            </View>
-            <View>
-                {this.state.other && 
-                  <InputTextWPlaceholder plchldrTxt='Nature of Impact' />
-                }
-            </View>
-            <View style={styles.containerStacked}>
-                <SubmitOrSaveButton state={this.state} />
-                {this.state.submitted && 
-                  <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
-                }
-            </View>
-            <View style={styles.containerStacked}>
-              <Button
-                type="outline"
-                icon={
-                  <Icon
-                  name='arrow-left'
-                  size={15}
-                  color='blue'
-                  />
-                }
-                onPress={() => this.props.navigation.navigate('Map')}
-                iconLeft
-                title='   Back To Map'
-              />
-            </View>
-          </KeyboardAwareScrollView>
+      <OptionButton
+        icon="md-pizza"
+        onPress={() => null}
+      />
+
+      <OptionButton
+        icon="md-pizza"
+        onPress={() => null}
+        isLastOption
+      />
+    </ScrollView>
+  );
+}
+
+function OptionButton({ icon, label, onPress, isLastOption }) {
+  return (
+    <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
+      <View style={{ flexDirection: 'row' }}>
+        <View style={styles.optionIconContainer}>
+          <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
+        </View>
+        <View style={styles.optionTextContainer}>
+          <LabelForInput customLabel='Order #' />
+
+        </View>
       </View>
-    );
-  }
+    </RectButton>
+  );
 }
 
 function LabelForInput({customLabel}){
@@ -113,124 +51,31 @@ function LabelForInput({customLabel}){
     ;
 }
 
-function InputTextWPlaceholder({plchldrTxt}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      placeholder={plchldrTxt}
-      containerStyle={styles.containerInput}
-    />
-  );
-}
-
-function InputTextWPaTCT({plchldrTxt, txtCT}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      placeholder={plchldrTxt}
-      containerStyle={styles.containerInput}
-      textContentType={txtCT}
-    />
-  );
-}
-
-function InputTextWTCT({txtCT}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      containerStyle={styles.containerInput}
-      textContentType={txtCT}
-    />
-  );
-}
-
-function CheckboxWTaCaOP({name,ischecked,uponpress}) {
-  return (
-    <CheckBox
-      center
-      textStyle={styles.optionButton}
-      title={name}
-      checked={ischecked}
-      onPress={uponpress}
-    />
-  );
-}
-
-function ButtonWTitleAnIconAColor({name,iname,clr,uponpress}) {
-  return (
-    <Button
-      type="outline"
-      icon={
-        <Icon
-        name={iname}
-        size={15}
-        color={clr}
-        />
-      }
-      onPress={uponpress}
-      iconRight
-      title={name}
-    />
-  );
-}
-
-function readyToSubmit(state){
-  if(state.foname && state.focity && 
-    state.focountry && state.fotypeofarea &&
-    state.foeventname && state.fonatureofimpact){
-      return true;
-    } else {
-      return false;
-    }
-}
-
-function SubmitOrSaveButton(state){
-  if(readyToSubmit(state) == true){
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Submit Survey    '
-          iname='check'
-          clr='green'
-          uponpress={() => null}
-        />
-      );
-    } else {
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Save Progress    '
-          iname='save'
-          clr='red'
-          uponpress={() => null}
-        />
-      );
-    }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+    backgroundColor: '#fafafa',
   },
-  optionsTitleText: {
-    textAlign: 'center',
-    fontSize: 32,
-    paddingTop: 60,
-    marginBottom: 12,
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
+  contentContainer: {
+    paddingTop: 15,
   },
   optionIconContainer: {
-    marginRight: 9,
+    marginRight: 12,
   },
   option: {
     backgroundColor: '#fdfdfd',
     paddingHorizontal: 15,
     paddingVertical: 15,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: 0,
+    borderColor: '#ededed',
+  },
+  lastOption: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#EDEDED',
   },
   optionText: {
     fontSize: 15,
+    alignSelf: 'flex-start',
     marginTop: 1,
   },
   optionButton: {

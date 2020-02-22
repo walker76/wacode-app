@@ -9,6 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import StartLocationScreen from './screens/StartLocation';
+import MyOrdersScreen from './screens/MyOrdersScreen';
+import OrderDetailsScreen from './screens/OrderDetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -54,6 +56,7 @@ export default function App(props) {
           <Stack.Navigator initialRouteName='Start' headerMode='none'>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen name="Start" component={StartLocationScreen} />
+            <Stack.Screen name="OrderDetails" component={OrderDetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
