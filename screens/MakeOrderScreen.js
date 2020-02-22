@@ -423,7 +423,7 @@ export default class MakeOrderScreen extends React.Component {
             }
 
             <View style={styles.containerStacked}>
-                <SubmitOrSaveButton state={this.state} onClick={this.onSubmit}/>
+                <SubmitOrSaveButton state={this.state} uponpress={this.onSubmit}/>
                 {this.state.submitted &&
                   <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
                 }
@@ -514,26 +514,15 @@ function readyToSubmit(state){
     }
 }
 
-function SubmitOrSaveButton(state){
-  if(readyToSubmit(state) == true){
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Submit Survey    '
-          iname='check'
-          clr='green'
-          uponpress={() => null}
-        />
-      );
-    } else {
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Place Order'
-          iname='save'
-          clr='red'
-          uponpress={() => null}
-        />
-      );
-    }
+function SubmitOrSaveButton(onpress){
+  return (
+    <ButtonWTitleAnIconAColor
+      name='Place Order'
+      iname='save'
+      clr='red'
+      uponpress={onpress}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
