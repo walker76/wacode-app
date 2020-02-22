@@ -423,7 +423,19 @@ export default class MakeOrderScreen extends React.Component {
             }
 
             <View style={styles.containerStacked}>
-                <SubmitOrSaveButton state={this.state} uponpress={this.onSubmit}/>
+              <Button
+                type="outline"
+                icon={
+                  <Icon
+                  name={iname}
+                  size={15}
+                  color={clr}
+                  />
+                }
+                onPress={this.onSubmit}
+                iconRight
+                title={name}
+              />
                 {this.state.submitted &&
                   <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
                 }
@@ -486,24 +498,6 @@ function CheckboxWTaCaOP({name,ischecked,uponpress}) {
   );
 }
 
-function ButtonWTitleAnIconAColor({name,iname,clr,uponpress}) {
-  return (
-    <Button
-      type="outline"
-      icon={
-        <Icon
-        name={iname}
-        size={15}
-        color={clr}
-        />
-      }
-      onPress={uponpress}
-      iconRight
-      title={name}
-    />
-  );
-}
-
 function readyToSubmit(state){
   if(state.foname && state.focity && 
     state.focountry && state.fotypeofarea &&
@@ -512,17 +506,6 @@ function readyToSubmit(state){
     } else {
       return false;
     }
-}
-
-function SubmitOrSaveButton(onpress){
-  return (
-    <ButtonWTitleAnIconAColor
-      name='Place Order'
-      iname='save'
-      clr='red'
-      uponpress={onpress}
-    />
-  );
 }
 
 const styles = StyleSheet.create({
