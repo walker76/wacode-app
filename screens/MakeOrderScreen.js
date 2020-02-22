@@ -6,11 +6,15 @@ import { CheckBox, Input, Button } from 'react-native-elements';
 import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Permissions, Location} from 'expo';
+
 
 export default class MakeOrderScreen extends React.Component {
     constructor(props) {
         super(props);
+        this._getLocationAsync();
         this.state = {
+            submitted: false,
             apartment: false,
             residential: false,
             office: false,
@@ -32,9 +36,57 @@ export default class MakeOrderScreen extends React.Component {
             jalapenos: false,
             pineapple: false,
             olives: false,
+            location: { coords: {
+                    latitude: 31.5497,
+                    longitude: -97.1143,}},
+
 
         };
+        this.onSubmit = this.onSubmit.bind(this);
 
+    }
+
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if( status !== 'granted') {
+            this.setState({
+                locationResult: 'Location permission was denied!', location, });
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        console.log(location);
+        this.setState({locationResult: JSON.stringify(location), location, });
+    };
+
+    onSubmit(){
+
+      AsyncStorage.getItem('@Store:id')
+      .then(res => {
+        if(res !== undefined %% res !== null){
+          let jobRequest = {
+              title: this.state.title,
+              description: this.state.description,
+              deviceId: res, // THIS NEEDS TO BE FROM LOCAL STORAGE
+              lat: this.state.location.coords.latitude,
+              lang: this.state.location.coords.longitude,
+          };
+          console.log(jobRequest);
+    
+          fetch('https://wacode-2020.herokuapp.com/orders/makeOrder', {
+              method: 'PUT',
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(jobRequest),
+          })
+          
+          this.props.navigation.navigate('PostConfirmation');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
     }
 
     render() {
@@ -329,8 +381,8 @@ export default class MakeOrderScreen extends React.Component {
             }
 
             <View style={styles.containerStacked}>
-                <SubmitOrSaveButton state={this.state} />
-                {this.state.submitted && 
+                <SubmitOrSaveButton state={this.state} onClick={this.onSubmit}/>
+                {this.state.submitted &&
                   <Text style={styles.messageText}>Your Order Has Been Placed!</Text>
                 }
             </View>
