@@ -31,11 +31,31 @@ export default class StartLocationScreen extends React.Component {
             <View style={styles.containerGallery}>
               <GallerySwiper
                   images={[
-                    { source: require("../assets/images/shorty-in-front.jpg"),
-                      dimensions: { width: 550, height: 366 } },
+                    { source: require("../assets/images/pep.jpg"),
+                      width: 550,
+                      height: 257 },
+
                     { source: require("../assets/images/shorty-wife.jpg"),
                       width: 760,
                       height: 540 },
+
+                    { source: require("../assets/images/spinach.jpeg"),
+                      width: 183,
+                      height: 275 },
+
+                    { source: require("../assets/images/shorty-in-front.jpg"),
+                      dimensions: { width: 550, height: 366 } },
+
+                    { source: require("../assets/images/shortysinside.jpg"),
+                      width: 860,
+                      height: 500 },
+
+                    { source: require("../assets/images/supreme.jpeg"),
+                      width: 225,
+                      height: 225 },
+
+
+
 
                   ]}
               />
