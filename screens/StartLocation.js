@@ -19,24 +19,26 @@ export default class StartLocationScreen extends React.Component {
   }
 
   onSubmit(){
-    //   console.log('starting registration')
-    //     axios.put('https://wacode-2020.herokuapp.com/device/register')
-    //     .then(response => {
-    //         console.log('here2')
-    //     console.log(response.data);
-    //     if(response.data !== undefined){
-    //         console.log('response', response.data);
-    //         AsyncStorage.setItem('@Store:id', response.data.id)
-    //         .catch(err => {
-    //             console.error(err);
-    //         });
-    //     }
-    //     })
-    //     .catch(err => {
-    //         console.error(err);
-    //     });
-    //     console.log('completed registration')
-        this.props.navigation.navigate('Root');
+      console.log('starting registration')
+        axios.put('https://wacode-2020.herokuapp.com/device/register')
+        .then(response => {
+            console.log('here2')
+        console.log(response.data);
+        if(response.data !== undefined){
+            console.log('response', response.data);
+            AsyncStorage.setItem('@Store:id', response.data.id+"")
+            .then(() => {
+                this.props.navigation.navigate('Root');
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        }
+        })
+        .catch(err => {
+            console.error(err);
+        });
+        console.log('completed registration')
   }
 
   render() {
