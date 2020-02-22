@@ -7,7 +7,7 @@ import { ScrollView, KeyboardAvoidingView, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class StartLocationScreen extends React.Component {
+export default class OrderDetailsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,13 +21,27 @@ export default class StartLocationScreen extends React.Component {
         <ScrollView>
             <Text style={styles.optionsTitleText}>Local Pizza Provider Information</Text>
             <Text style={styles.optionSubheadingText}>Shorty's Pizza Shack</Text>
+            <LabelForInput customLabel='Order #' />
+            <Text style={styles.option}>000066</Text>
+            <LabelForInput customLabel='Status' />
+            <Text style={styles.option}>PENDING</Text>
             <LabelForInput customLabel='Address' />
-            <Text style={styles.option}>1712 S 12th St. Waco, TX 76706</Text>
-            <LabelForInput customLabel='Phone Number' />
-            <Text style={styles.option}>(254) 235-2646</Text>
-            <LabelForInput customLabel='Operating Hours' />
-            <Text style={styles.option}>Sun.-Sat. 11AM-11PM</Text>
-            
+            <Text style={styles.option}>Cashion Academic Center Waco, TX 76706</Text>
+            <View style={styles.optionTextContainer}>
+                <Button
+                    type="outline"
+                    icon={
+                    <Icon
+                    name='arrow-left'
+                    size={15}
+                    color='blue'
+                    />
+                    }
+                    onPress={() => this.props.navigation.navigate('MyOrders')}
+                    iconLeft
+                    title='   Back To Orders'
+                />
+            </View>
           </ScrollView>
       </View>
     );
@@ -40,54 +54,6 @@ function LabelForInput({customLabel}){
       {customLabel}
     </Text>)
     ;
-}
-
-function InputTextWPlaceholder({plchldrTxt}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      placeholder={plchldrTxt}
-      containerStyle={styles.containerInput}
-    />
-  );
-}
-
-function InputTextWPaTCT({plchldrTxt, txtCT}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      placeholder={plchldrTxt}
-      containerStyle={styles.containerInput}
-      textContentType={txtCT}
-      keyboardType='number-pad'
-      autoCompleteType="postal-code"
-      maxLength={5}
-      returnKeyType='go'
-    />
-  );
-}
-
-function InputTextWTCT({txtCT}) {
-  return (
-    <Input
-      labelStyle={styles.optionText}
-      containerStyle={styles.containerInput}
-      textContentType={txtCT}
-      keyboardType='numeric'
-    />
-  );
-}
-
-function CheckboxWTaCaOP({name,ischecked,uponpress}) {
-  return (
-    <CheckBox
-      center
-      textStyle={styles.optionButton}
-      title={name}
-      checked={ischecked}
-      onPress={uponpress}
-    />
-  );
 }
 
 function ButtonWTitleAnIconAColor({name,iname,clr,uponpress}) {
@@ -115,28 +81,6 @@ function readyToSubmit(state){
       return true;
     } else {
       return false;
-    }
-}
-
-function SubmitOrSaveButton(state){
-  if(readyToSubmit(state) == true){
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Submit Survey    '
-          iname='check'
-          clr='green'
-          uponpress={() => null}
-        />
-      );
-    } else {
-      return (
-        <ButtonWTitleAnIconAColor
-          name='Save Progress    '
-          iname='save'
-          clr='red'
-          uponpress={() => null}
-        />
-      );
     }
 }
 
