@@ -15,6 +15,11 @@ export default class MakeOrderScreen extends React.Component {
         super(props);
         this._getLocationAsync();
         this.state = {
+            name: '',
+            streetaddress: '',
+            city : '',
+            country: '',
+            address: '',
             submitted: false,
             apartment: false,
             residential: false,
@@ -99,11 +104,37 @@ export default class MakeOrderScreen extends React.Component {
             <Text style={styles.optionsTitleText}>Place An Order</Text>
             <Text style={styles.optionSubheadingText}>Location Information</Text>
             <LabelForInput customLabel='Full Name' />
-            <InputTextWPlaceholder plchldrTxt='Joseph Smith' />
-            <LabelForInput customLabel='Location' />
-            <InputTextWPaTCT plchldrTxt='Street' txtCT='fullStreetAddress' />
-            <InputTextWPaTCT plchldrTxt='City' txtCT='addressCity' />
-            <InputTextWPaTCT plchldrTxt='Country' txtCT='countryName' />
+            <Input
+                labelStyle={styles.optionText}
+                placeholder={'Joseph Smith'}
+                containerStyle={styles.containerInput}
+                onChangeText={(address) => this.setState({address})}
+                value={this.state.address}
+            />            <LabelForInput customLabel='Location' />
+            <Input
+                labelStyle={styles.optionText}
+                placeholder={'Street Address'}
+                containerStyle={styles.containerInput}
+                textContentType={'fullStreetAddress'}
+                onChangeText={(streetaddress) => this.setState({streetaddress})}
+                value={this.state.streetaddress}
+            />            <InputTextWPaTCT plchldrTxt='City' txtCT='addressCity' />
+            <Input
+                labelStyle={styles.optionText}
+                placeholder={'City'}
+                containerStyle={styles.containerInput}
+                textContentType={'addressCity'}
+                onChangeText={(city) => this.setState({city})}
+                value={this.state.city}
+            />
+            <Input
+                labelStyle={styles.optionText}
+                placeholder={'Country' }
+                containerStyle={styles.containerInput}
+                textContentType={'countryName'}
+                onChangeText={(country) => this.setState({country})}
+                value={this.state.country}
+            />
             <LabelForInput customLabel='Type of Area' />
             <View style={styles.optionMultipleButtons}>
               <CheckboxWTaCaOP
