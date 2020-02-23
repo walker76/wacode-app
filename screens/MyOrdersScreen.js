@@ -15,29 +15,37 @@ export default class MyOrdersScreen extends React.Component {
     this.state = {
       orders: []
     }
+    this._loadOrders = this._loadOrders.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState){
+    console.log(nextProps.route.params);
     if(nextProps.route.params !== undefined && nextProps.route.params.refresh !== undefined){
+      console.log('refresh');
+      this._loadOrders();
       return nextProps.route.params.refresh;
     }
     return true;
   }
 
   componentDidMount(){
-        axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + 12345)
-        .then(response => {
-          console.log(response.data);
-          if(response.data !== undefined && response.data !== null){
-            console.log('setting state');
-            this.setState({
-              orders: response.data,
-            });
-          }
-        })
-    .catch(err => {
-      console.error(err);
-    });
+      this._loadOrders();
+  }
+
+  _loadOrders(){
+    axios.get('https://wacode-2020.herokuapp.com/orders/findByDeviceId/' + 12345)
+    .then(response => {
+      console.log(response.data);
+      if(response.data !== undefined && response.data !== null){
+        console.log('setting state');
+        this.setState({
+          orders: response.data,
+        });
+      }
+    })
+.catch(err => {
+  console.error(err);
+});
   }
 
   render(){
