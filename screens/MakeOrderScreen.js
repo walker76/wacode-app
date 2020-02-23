@@ -14,40 +14,7 @@ export default class MakeOrderScreen extends React.Component {
     constructor(props) {
         super(props);
         this._getLocationAsync();
-        this.state = {
-            name: '',
-            streetaddress: '',
-            city : '',
-            stayte: '',
-            address: '',
-            submitted: false,
-            apartment: false,
-            residential: false,
-            office: false,
-            school: false,
-            church: false,
-            buffalo: false,
-            pepperoni: false,
-            cheese: false,
-            margherita: false,
-            bbq: false,
-            custom: false,
-            meat: false,
-            bbqsauce: false,
-            tomatosauce: false,
-            buffalosauce: false,
-            pepperonimeat: false,
-            sausagemeat: false,
-            chickenmeat: false,
-            jalapenos: false,
-            pineapple: false,
-            olives: false,
-            location: { coords: {
-                    latitude: 31.5497,
-                    longitude: -97.1143,}},
-
-
-        };
+        this.state = this.getInitialState();
         this.onSubmit = this.onSubmit.bind(this);
 
     }
@@ -89,7 +56,9 @@ export default class MakeOrderScreen extends React.Component {
               body: JSON.stringify(jobRequest),
           })
           
-          this.props.navigation.navigate('MyOrders', {refresh: true});
+          this.setState(this.getInitialState(), () => {
+            this.props.navigation.navigate('MyOrders', {refresh: true});
+          })
         }
       })
       .catch(err => {
@@ -444,6 +413,41 @@ export default class MakeOrderScreen extends React.Component {
           </KeyboardAwareScrollView>
       </View>
     );
+  }
+
+  getInitialState(){
+    return {
+      name: '',
+      streetaddress: '',
+      city : '',
+      stayte: '',
+      address: '',
+      submitted: false,
+      apartment: false,
+      residential: false,
+      office: false,
+      school: false,
+      church: false,
+      buffalo: false,
+      pepperoni: false,
+      cheese: false,
+      margherita: false,
+      bbq: false,
+      custom: false,
+      meat: false,
+      bbqsauce: false,
+      tomatosauce: false,
+      buffalosauce: false,
+      pepperonimeat: false,
+      sausagemeat: false,
+      chickenmeat: false,
+      jalapenos: false,
+      pineapple: false,
+      olives: false,
+      location: { coords: {
+              latitude: 31.5497,
+              longitude: -97.1143,}},
+    };
   }
 }
 
