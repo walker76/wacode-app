@@ -11,8 +11,15 @@ export default class MyOrdersScreen extends React.Component {
 
   constructor(props){
     super(props);
+
     this.state = {
       orders: []
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps.route.params !== undefined){
+      return nextProps.route.params.refresh;
     }
   }
 
@@ -33,7 +40,6 @@ export default class MyOrdersScreen extends React.Component {
   }
 
   render(){
-
     const list = this.state.orders;
     if(list.length <= 0){
       return(
@@ -53,6 +59,7 @@ export default class MyOrdersScreen extends React.Component {
         {
           list.map((item, i) => (
             <OptionButton
+              key={i}
               icon="md-pizza"
               title={item.title}
               id={item.id}

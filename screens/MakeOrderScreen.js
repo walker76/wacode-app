@@ -89,7 +89,7 @@ export default class MakeOrderScreen extends React.Component {
               body: JSON.stringify(jobRequest),
           })
           
-          this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('MyOrders', {refresh: true});
         }
       })
       .catch(err => {
