@@ -18,9 +18,10 @@ export default class MyOrdersScreen extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(nextProps.route.params !== undefined){
+    if(nextProps.route.params !== undefined && nextProps.route.params.refresh !== undefined){
       return nextProps.route.params.refresh;
     }
+    return true;
   }
 
   componentDidMount(){
