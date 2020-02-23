@@ -70,7 +70,7 @@ export default class MyOrdersScreen extends React.Component {
             <OptionButton
               key={i}
               icon="md-pizza"
-              title={item.title}
+              title={item.title + " - " + item.status}
               id={item.id}
               onPress={() => {
                   null
